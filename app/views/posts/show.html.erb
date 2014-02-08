@@ -1,0 +1,12 @@
+<div class="center hero-unit">
+<p>
+  <%= @post.title %>
+</p>
+ 
+<p>
+  <%= @post.text %>
+</p>
+<%= link_to 'Изменить', edit_post_path(@post) %> |
+<%= link_to 'Обратно', posts_path %>
+<hr> 
+</div>

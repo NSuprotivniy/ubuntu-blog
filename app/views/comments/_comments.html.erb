@@ -1,0 +1,13 @@
+<h3>
+  <%= comment.commenter %>
+</h3>
+ 
+<p>
+  <%= comment.body %>
+</p>
+
+<p>
+  <%= link_to 'Удалить комметарий', [comment.post, comment],
+               method: :delete,
+               data: { confirm: 'Вы уверены?' } %>
+</p>
