@@ -1,7 +1,8 @@
 class Post < ActiveRecord::Base
   has_many :comments, dependent: :destroy
-  
-  validates :title,
-    presence: true,
-    length: { minimum: 2 }
+  belongs_to :user
+  default_scope -> { order('created_at DESC') }
+  validates :title, presence: true, length: { minimum: 2 }
+  validates :text, presence: true, length: { minimum: 10 }
+  validates :user_id, presence: true
 end

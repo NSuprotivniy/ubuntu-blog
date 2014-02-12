@@ -9,6 +9,8 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @posts = @user.posts.paginate(page: params[:page])
+    @post = current_user.posts.build if signed_in?
   end
 
   def new
@@ -43,6 +45,10 @@ class UsersController < ApplicationController
     User.find(params[:id]).destroy
     flash[:success] = "Пользователь удален."
     redirect_to users_url
+  end
+
+  def create_post
+    @post = current_user.posts.build if signed_in?
   end
 
   private

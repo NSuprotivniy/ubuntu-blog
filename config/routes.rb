@@ -7,6 +7,7 @@ SampleApp::Application.routes.draw do
     resources :comments
   end
 
+  match '/create_post',to: 'users#create_post', via: 'get'
   match '/signup',  to: 'users#new',            via: 'get'
   match '/help',    to: 'static_pages#help',    via: 'get'
   match '/signin',  to: 'sessions#new',         via: 'get'

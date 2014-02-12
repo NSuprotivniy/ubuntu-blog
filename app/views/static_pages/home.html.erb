@@ -1,5 +1,21 @@
+<% if signed_in? %>
+<div class="row">
+    <aside class="span4">
+      <section>
+        <%= render 'shared/user_info' %>
+      </section>
+    </aside>
+  </div>
+	<div class="center hero-unit">
+     	<p><%= link_to "Создать статью", create_post_path,
+     		class: "btn btn-large btn-primary" %></p>
+     	 <p><%= link_to "Статьи", controller: "posts",
+     	 	 class: "btn btn-large btn-primary" %></p>
+	</div>
+<% else %>
 <div class="center hero-unit">
-	<h1>Добро пожаловать!</h1>
-	<p><%= link_to "Зарегистрируйся сейчас!", signup_path, class: "btn btn-large btn-primary" %></p>
-	<p><%= link_to "Статьи", controller: "posts" %></p>
+		<h1>Добро пожаловать!</h1>
+		<p><%= link_to "Зарегистрируйся сейчас!", signup_path, class: "btn btn-large btn-primary" %></p>
+		<p><%= link_to "Статьи", controller: "posts" %></p>
 </div>
+<% end %>

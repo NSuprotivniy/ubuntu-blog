@@ -1,0 +1,11 @@
+<li>
+  <span class="title"><%= link_to post.title, Post.find(post.id)  %></span>
+  <span class="timestamp">
+    выложено <%= time_ago_in_words(post.created_at) %> назад.
+  </span>
+  <% if current_user?(post.user) %>
+    <%= link_to "Удалить", post, method: :delete,
+                                     data: { confirm: "Уверены?" },
+                                     title: post.title %>
+  <% end %>
+</li>

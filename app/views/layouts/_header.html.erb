@@ -4,7 +4,9 @@
       <%= link_to "Ubuntu Blog", root_path, id: "logo" %>
       <nav>
         <ul class="nav pull-right">
-          <li><%= link_to "Регистрация", signup_path %></li>
+          <% if current_user.nil? %>
+            <li><%= link_to "Регистрация", signup_path %></li>
+          <% end %>
           <% if signed_in? %>
             <li><%= link_to "Пользователи", users_path %></li>
             <li id="fat-menu" class="dropdown">

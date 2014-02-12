@@ -58,11 +58,21 @@ describe "User pages" do
 
   describe "profile page" do
     let(:user) { FactoryGirl.create(:user) }
+    let!(:m1) { FactoryGirl.create(:post, user: user,
+     text: "Fooooooooo", title: "Baz") }
+    let!(:m2) { FactoryGirl.create(:post, user: user,
+     text: "Barrrrrrrr", title: "Oof") }
 
     before { visit user_path(user) }
 
     it { should have_selector('h1',    text: user.name) }
     it { should have_title(user.name) }
+    
+    describe "posts" do
+      it { should have_content(m1.title) }
+      it { should have_content(m2.title) }
+      it { should have_content(user.posts.count) }
+    end
   end
 
   describe "signup page" do
@@ -86,8 +96,8 @@ describe "User pages" do
       describe "error messages" do
         before { click_button submit }
 
-        it { should have_title('Зарегистрироваться') }
-        it { should have_content('Ошибка') }
+        it { should have_title('Регистрация') }
+        it { should have_content('Формы заполнены неправильно') }
       end
     end
 
@@ -109,7 +119,7 @@ describe "User pages" do
         let(:user) { User.find_by_email('user@example.com') }
 
         it { should have_title(user.name) }
-        it { should have_selector('div.alert.alert-success', text: 'Welcome') }
+        it { should have_selector('div.alert.alert-success', text: 'Добро пожаловать') }
         it { should have_link('Выйти') }
       end
     end
@@ -123,7 +133,7 @@ describe "User pages" do
     end
 
     describe "page" do
-      it { should have_selector('h1',    text: "Update your profile") }
+      it { should have_selector('h1',    text: "Изменить профиль") }
       it { should have_title("Изменить профиль") }
       it { should have_link('Изменить', href: 'http://gravatar.com/emails') }
     end
@@ -131,7 +141,7 @@ describe "User pages" do
     describe "with invalid information" do
       before { click_button "Сохранить изменения" }
 
-      it { should have_content('error') }
+      it { should have_content('Формы заполнены неправильно') }
     end
 
     describe "with valid information" do
