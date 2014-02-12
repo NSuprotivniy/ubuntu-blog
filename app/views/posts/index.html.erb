@@ -1,7 +1,12 @@
 <div class="center hero-unit">
 	<h1>Статьи</h1> <hr>
 	<% @posts.each do |post| %>
-		<h2><%= link_to post.title, action: :show, id: post.id %></h2>
+		<h2><%= link_to post.title, action: :show, id: post.id %>
+			<% if current_user.admin? %>
+  	 			| <%= link_to "delete", post, method: :delete,
+                                  data: { confirm: "You sure?" } %>
+  			<% end %>
+  		</h2>
 	<% end %>
 	<%= will_paginate @posts %>
 </div>
